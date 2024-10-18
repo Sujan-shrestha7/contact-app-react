@@ -1,29 +1,27 @@
 import React from 'react';
+import './style.css';
 
 class AddContact extends React.Component{
 
     state={
-        "id":"",
         "name":"",
         "email":"",
     }
     add =(e)=>{
         e.preventDefault();
-        if(this.state.name === " " && this.state.email === " "){
+        if(this.state.name === " " || this.state.email === " "){
             alert("please fill up all form");
             return
         }
+        this.props.AddContactHandler(this.state);
+        this.setState({name:"", email:""})
         console.log(this.state);
-    }
+    };
     render(){
         return(
             <div className='ui main' style={{marginTop:"80px"}}>
                 <h2> Add Contact</h2>
-                <form className='ui form' onSubmit={this.add}>
-                <div className='field'>
-                        <label>ID:</label>
-                        <input type='text' name='name' placeholder='name' value={this.state.id} onChange={(e)=> this.setState({id: e.target.value})}/>
-                    </div> 
+                <form className='ui form container' onSubmit={this.add}>
                     <div className='field'>
                         <label>Name:</label>
                         <input type='text' name='name' placeholder='name' value={this.state.name} onChange={(e)=> this.setState({name: e.target.value})}/>
